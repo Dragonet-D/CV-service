@@ -1,4 +1,4 @@
-import React, { createElement } from 'react';
+import { createElement } from 'react';
 import { dynamic } from 'dva';
 import pathToRegexp from 'path-to-regexp';
 import { getMenuData } from './menu';
@@ -72,7 +72,9 @@ export const getRouterData = app => {
     '/': {
       component: dynamicWrapper(app, ['global'], () => import('../layouts/BasicLayout'))
     },
-    '/home': dynamicWrapper(app, [], () => <div>123</div>),
+    '/home': {
+      component: dynamicWrapper(app, [], () => import('pages/Exception/Exception403'))
+    },
     '/exception': {
       component: dynamicWrapper(app, [], () => import('../layouts/ExceptionLayout'))
     },
