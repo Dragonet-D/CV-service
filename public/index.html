@@ -2,42 +2,81 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <title>React</title>
+    <style>
+    .cluster-group.activated {
+            transform-origin: center;
+            transform: scale(1.2);
+            transition: transform linear 0.4s;
+        }
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+            /* Change the appearance of clusters when activated */
+            .cluster-group.activated .cluster {
+                stroke: rgba(255,255,255,1);
+                stroke-width: 2;
+                transition: all ease 1s;
+            }
+
+            .cluster-group.activated .cluster-text {
+                fill: #000;
+                font-weight: bold;
+                transition: all ease 1s;
+            }
+
+
+        /* hide flares by default */
+        .flare-group {
+            opacity: 0;
+        }
+
+
+            /* animate display of flares */
+            .flare-group.activated {
+                opacity: 1;
+                transition: opacity linear 0.06s;
+            }
+
+                /* this just chains the display of flares to occur one after the other using transition delay - could be a better way to do this natively but using SASS or LESS this would be much more concise */
+                .flare-group.activated:nth-of-type(1) {
+                    transition-delay: 0.06s;
+                }
+
+                .flare-group.activated:nth-of-type(2) {
+                    transition-delay: 0.12s;
+                }
+
+                .flare-group.activated:nth-of-type(3) {
+                    transition-delay: 0.18s;
+                }
+
+                .flare-group.activated:nth-of-type(4) {
+                    transition-delay: 0.24s;
+                }
+
+                .flare-group.activated:nth-of-type(5) {
+                    transition-delay: 0.30s;
+                }
+
+                .flare-group.activated:nth-of-type(6) {
+                    transition-delay: 0.36s;
+                }
+
+        .cluster-group .flare-group.activated:nth-of-type(7) {
+            transition-delay: 0.42s;
+        }
+
+        .flare-group.activated:nth-of-type(8) {
+            transition-delay: 0.48s;
+        }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <div id="INTEGRATED_VIDEO_HUB"></div>
+    <script src="%PUBLIC_URL%/static/config/env-file/env-config.js"></script>
   </body>
 </html>
