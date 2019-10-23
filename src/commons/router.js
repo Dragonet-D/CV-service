@@ -78,8 +78,14 @@ export const getRouterData = app => {
     '/class-component/count': {
       component: dynamicWrapper(app, [], () => import('pages/ClassComponent/Count'))
     },
+    '/class-component/demo': {
+      component: dynamicWrapper(app, [], () => import('pages/ClassComponent/Demo'))
+    },
     '/hooks/count': {
       component: dynamicWrapper(app, [], () => import('pages/Hooks/Count'))
+    },
+    '/hooks/demo': {
+      component: dynamicWrapper(app, [], () => import('pages/Hooks/Demo'))
     },
     '/hooks/optimization': {
       component: dynamicWrapper(app, [], () => import('pages/Hooks/Optimization'))

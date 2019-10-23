@@ -1,26 +1,32 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Button from '@material-ui/core/Button';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { Button, Row } from 'components/common';
 import { connect } from 'dva';
+import { ThemeContext, LocaleContext } from 'utils/context';
 
 function Count(props) {
   const { dispatch, global } = props;
   const { hooksCount } = global;
   const countRef = useRef(null);
+  const theme = useContext(ThemeContext);
+  const locale = useContext(LocaleContext);
 
   const [stateCount, setStateCount] = useState(0);
+  const [firstName, setFirstName] = useState('Harry');
+  const [lastName, setLastName] = useState('Potter');
   countRef.current = stateCount;
 
+  const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
     return () => {
-      dispatch({
-        type: 'global/clearHooksCount'
-      });
+      window.removeEventListener('resize', handleResize);
     };
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
-    document.title = hooksCount;
-  }, [dispatch, hooksCount]);
+    document.title = `${firstName}  ${lastName}`;
+  }, [firstName, lastName]);
 
   function handleCountChange() {
     dispatch({
@@ -38,17 +44,29 @@ function Count(props) {
     }, 2000);
   };
 
+  function handleFirstNameChange(e) {
+    setFirstName(e.target.value);
+  }
+
+  function handleLastNameChange(e) {
+    setLastName(e.target.value);
+  }
+
   return (
     <>
-      <Button color="secondary" variant="contained" onClick={handleCountChange}>
-        {`props count is ${hooksCount}`}
-      </Button>
-      <Button color="secondary" variant="contained" onClick={handleStateCountChange}>
-        {`state count is ${stateCount}`}
-      </Button>
-      <Button color="secondary" variant="contained" onClick={alertCount}>
-        Alert Count
-      </Button>
+      <section className={theme}>
+        <Row label="First Name">
+          <input type="text" value={firstName} onChange={handleFirstNameChange} />
+        </Row>
+        <Row label="Last Name">
+          <input type="text" value={lastName} onChange={handleLastNameChange} />
+        </Row>
+        <Row label="Width">{width}</Row>
+        <Row label="Language">{locale}</Row>
+      </section>
+      <Button onClick={handleCountChange}>{`props count is ${hooksCount}`}</Button>
+      <Button onClick={handleStateCountChange}>{`state count is ${stateCount}`}</Button>
+      <Button onClick={alertCount}>Alert Count</Button>
     </>
   );
 }

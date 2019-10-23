@@ -1,34 +1,38 @@
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
+import { Button, Row } from 'components/common';
 import { connect } from 'dva';
+import { ThemeContext, LocaleContext } from 'utils/context';
 
 class Count extends Component {
   state = {
-    stateCount: 0
+    stateCount: 0,
+    firstName: 'Harry',
+    lastName: 'Potter',
+    width: window.innerWidth
   };
 
   componentDidMount() {
-    const { global } = this.props;
-    this.changeTitle(global.classComponentCount);
+    this.changeTitle();
+    window.addEventListener('resize', this.handleResize);
   }
 
   componentDidUpdate() {
-    const { global } = this.props;
-    const { classComponentCount } = global;
-    this.changeTitle(classComponentCount);
-  }
-
-  componentWillUnmount() {
-    const { dispatch, global } = this.props;
-    dispatch({
-      type: 'global/clearClassComponentCount'
-    });
-    document.title = global.classComponentCount;
     this.changeTitle();
   }
 
-  changeTitle = (count = 0) => {
-    document.title = count;
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  }
+
+  handleResize = () => {
+    this.setState({
+      width: window.innerWidth
+    });
+  };
+
+  changeTitle = () => {
+    const { firstName, lastName } = this.state;
+    document.title = `${firstName}  ${lastName}`;
   };
 
   handleCountChange = () => {
@@ -46,17 +50,39 @@ class Count extends Component {
     this.setState(prevState => ++prevState.stateCount);
   };
 
+  handleFirstNameChange = e => {
+    this.setState({ firstName: e.target.value });
+  };
+
+  handleLastNameChange = e => {
+    this.setState({ lastName: e.target.value });
+  };
+
   render() {
     const { global } = this.props;
-    const { stateCount } = this.state;
+    const { stateCount, firstName, lastName, width } = this.state;
     return (
       <>
-        <Button color="secondary" variant="contained" onClick={this.handleCountChange}>
+        <ThemeContext.Consumer>
+          {theme => (
+            <section className={theme}>
+              <Row label="First Name">
+                <input type="text" value={firstName} onChange={this.handleFirstNameChange} />
+              </Row>
+              <Row label="Last Name">
+                <input type="text" value={lastName} onChange={this.handleLastNameChange} />
+              </Row>
+              <Row label="Width">{width}</Row>
+              <LocaleContext.Consumer>
+                {local => <Row label="Name">{local}</Row>}
+              </LocaleContext.Consumer>
+            </section>
+          )}
+        </ThemeContext.Consumer>
+        <Button onClick={this.handleCountChange}>
           {`props count is ${global.classComponentCount}`}
         </Button>
-        <Button color="secondary" variant="contained" onClick={this.handleStateCountChange}>
-          {`state count is ${stateCount}`}
-        </Button>
+        <Button onClick={this.handleStateCountChange}>{`state count is ${stateCount}`}</Button>
       </>
     );
   }

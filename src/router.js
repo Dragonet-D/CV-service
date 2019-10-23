@@ -1,7 +1,7 @@
 import React from 'react';
 import { router, dynamic } from 'dva';
 import MessageCenter from 'components/MessageCenter';
-import CodeLoading from 'components/Loading/CodeLoading';
+import CodeLoading from 'components/Loading/LoadingGoogle';
 import materialKeys from './utils/materialKeys';
 import { getRouterData } from './commons/router';
 import IVHTheme from './components/Theme';
