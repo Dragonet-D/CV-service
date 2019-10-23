@@ -26,6 +26,11 @@ const menuData = [
         name: 'Count',
         path: 'count',
         authority: []
+      },
+      {
+        name: 'Optimization',
+        path: 'optimization',
+        authority: []
       }
     ]
   }

@@ -81,6 +81,9 @@ export const getRouterData = app => {
     '/hooks/count': {
       component: dynamicWrapper(app, [], () => import('pages/Hooks/Count'))
     },
+    '/hooks/optimization': {
+      component: dynamicWrapper(app, [], () => import('pages/Hooks/Optimization'))
+    },
     '/exception': {
       component: dynamicWrapper(app, [], () => import('../layouts/ExceptionLayout'))
     },
