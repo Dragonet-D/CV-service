@@ -10,7 +10,6 @@ import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import { FormatIndentDecrease, FormatIndentIncrease } from '@material-ui/icons';
 import { connect, router, routerRedux } from 'dva';
-import DocumentTitle from 'react-document-title';
 import { getRoutes } from 'utils/utils';
 import Authorized from 'utils/Authorized';
 import { getMenuData } from 'commons/menu';
@@ -173,15 +172,6 @@ function BasicLayout(props) {
     return pathInfo ? pathInfo.name || '' : '';
   }
 
-  function getPageTitle() {
-    const { pathname } = location;
-    let title = 'IVH';
-    if (routerData[pathname] && routerData[pathname].name) {
-      title = `${routerData[pathname].name} - IVH`;
-    }
-    return title;
-  }
-
   function isLoading() {
     const pathInfo = routerData[location.pathname];
     return !(pathInfo && pathInfo.noLoading);
@@ -195,87 +185,85 @@ function BasicLayout(props) {
   const titleName = getPageName();
   const isGlobalLoadingNotNeeded = isLoading();
   return (
-    <DocumentTitle title={getPageTitle()}>
-      <div className={classes.wrapper}>
-        <div className={styles.snowMask} />
-        <CssBaseline />
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
-          }}
-          open={open}
-        >
-          <div className={`${styles.toolbar_icon} ${open ? styles.toolbar_icon_active : ''}`}>
-            <div className={classes.logo_wrapper} onClick={handleGoHome}>
-              <div className={classes.logo}>
-                <img src="/static/media/logo.png" alt="IVH" />
-              </div>
-              {open && <div className={classes.icon_name}>React Hooks Share</div>}
+    <div className={classes.wrapper}>
+      <div className={styles.snowMask} />
+      <CssBaseline />
+      <Drawer
+        variant="permanent"
+        classes={{
+          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
+        }}
+        open={open}
+      >
+        <div className={`${styles.toolbar_icon} ${open ? styles.toolbar_icon_active : ''}`}>
+          <div className={classes.logo_wrapper} onClick={handleGoHome}>
+            <div className={classes.logo}>
+              <img src="/static/media/logo.png" alt="React" />
             </div>
+            {open && <div className={classes.icon_name}>React Hooks Share</div>}
           </div>
-          <Divider />
-          <ScrollBar style={{ overflow: 'hidden' }}>
-            <SiderMenu
-              expand={open}
-              location={location}
-              menuData={getMenuData()}
-              Authorized={Authorized}
-              onCollapse={onCollapse}
-              collapsed={!open}
-            />
+        </div>
+        <Divider />
+        <ScrollBar style={{ overflow: 'hidden' }}>
+          <SiderMenu
+            expand={open}
+            location={location}
+            menuData={getMenuData()}
+            Authorized={Authorized}
+            onCollapse={onCollapse}
+            collapsed={!open}
+          />
+        </ScrollBar>
+      </Drawer>
+      <main className={classes.main}>
+        {isGlobalLoadingNotNeeded && loading.global && <Loading />}
+        <AppBar position="static" color="inherit" className={classes.app_bar}>
+          <Typography variant="h6" color="inherit">
+            {open ? (
+              <IconButton
+                color="primary"
+                onClick={handleDrawerClose}
+                className={classes.expend_button}
+              >
+                <FormatIndentDecrease />
+              </IconButton>
+            ) : (
+              <IconButton
+                color="primary"
+                onClick={handleDrawerOpen}
+                className={classes.expend_button}
+              >
+                <FormatIndentIncrease />
+              </IconButton>
+            )}
+          </Typography>
+        </AppBar>
+        <div className={classes.container}>
+          <ScrollBar className={classes.content}>
+            {titleName && <BasicLayoutTitle titleName={titleName} />}
+            <Switch>
+              {redirectData.map(item => (
+                <Redirect key={item.from} exact from={item.from} to={item.to} />
+              ))}
+              {getRoutes(match.path, routerData).map(item => (
+                <Route
+                  key={item.key}
+                  path={item.path}
+                  component={item.component}
+                  exact={item.exact}
+                  authority={item.authority}
+                  redirectPath={isLogged ? '/home' : '/'}
+                  theme={theme}
+                  global={global}
+                />
+              ))}
+              <Redirect exact from="/" to={bashRedirect} />
+              <Route exact path="/home" />
+            </Switch>
           </ScrollBar>
-        </Drawer>
-        <main className={classes.main}>
-          {isGlobalLoadingNotNeeded && loading.global && <Loading />}
-          <AppBar position="static" color="inherit" className={classes.app_bar}>
-            <Typography variant="h6" color="inherit">
-              {open ? (
-                <IconButton
-                  color="primary"
-                  onClick={handleDrawerClose}
-                  className={classes.expend_button}
-                >
-                  <FormatIndentDecrease />
-                </IconButton>
-              ) : (
-                <IconButton
-                  color="primary"
-                  onClick={handleDrawerOpen}
-                  className={classes.expend_button}
-                >
-                  <FormatIndentIncrease />
-                </IconButton>
-              )}
-            </Typography>
-          </AppBar>
-          <div className={classes.container}>
-            <ScrollBar className={classes.content}>
-              {titleName && <BasicLayoutTitle titleName={titleName} />}
-              <Switch>
-                {redirectData.map(item => (
-                  <Redirect key={item.from} exact from={item.from} to={item.to} />
-                ))}
-                {getRoutes(match.path, routerData).map(item => (
-                  <Route
-                    key={item.key}
-                    path={item.path}
-                    component={item.component}
-                    exact={item.exact}
-                    authority={item.authority}
-                    redirectPath={isLogged ? '/home' : '/'}
-                    theme={theme}
-                    global={global}
-                  />
-                ))}
-                <Redirect exact from="/" to={bashRedirect} />
-                <Route exact path="/home" />
-              </Switch>
-            </ScrollBar>
-          </div>
-        </main>
-      </div>
-    </DocumentTitle>
+        </div>
+      </main>
+    </div>
   );
 }
 

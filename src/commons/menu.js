@@ -1,17 +1,30 @@
-import { I18n } from 'react-i18nify';
 import { isUrl } from '../utils/utils';
 
 const menuData = [
   {
-    name: I18n.t('menu.security.name'),
-    path: 'security',
+    name: 'Class Component',
+    path: 'class-component',
     authority: [],
-    icon: 'Security',
+    icon: 'Code',
     hideInMenu: false,
     children: [
       {
-        name: I18n.t('menu.security.children.userManagement'),
-        path: 'user',
+        name: '',
+        path: 'count',
+        authority: []
+      }
+    ]
+  },
+  {
+    name: 'Hooks',
+    path: 'hooks',
+    authority: [],
+    icon: 'ThumbUpAlt',
+    hideInMenu: false,
+    children: [
+      {
+        name: '',
+        path: 'count',
         authority: []
       }
     ]
