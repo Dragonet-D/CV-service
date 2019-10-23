@@ -3,6 +3,10 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'dva';
 
 class Count extends Component {
+  state = {
+    stateCount: 0
+  };
+
   componentDidMount() {
     const { global } = this.props;
     this.changeTitle(global.classComponentCount);
@@ -28,19 +32,30 @@ class Count extends Component {
   };
 
   handleCountChange = () => {
-    const { dispatch } = this.props;
+    const { dispatch, global } = this.props;
+    const { classComponentCount } = global;
     dispatch({
-      type: 'global/changeClassComponentCount'
+      type: 'global/changeClassComponentCount',
+      payload: {
+        count: classComponentCount + 1
+      }
     });
+  };
+
+  handleStateCountChange = () => {
+    this.setState(prevState => ++prevState.stateCount);
   };
 
   render() {
     const { global } = this.props;
+    const { stateCount } = this.state;
     return (
       <>
-        <div>{global.classComponentCount}</div>
         <Button color="secondary" variant="contained" onClick={this.handleCountChange}>
-          Click
+          {`props count is ${global.classComponentCount}`}
+        </Button>
+        <Button color="secondary" variant="contained" onClick={this.handleStateCountChange}>
+          {`state count is ${stateCount}`}
         </Button>
       </>
     );

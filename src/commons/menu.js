@@ -23,7 +23,7 @@ const menuData = [
     hideInMenu: false,
     children: [
       {
-        name: '',
+        name: 'Count',
         path: 'count',
         authority: []
       }

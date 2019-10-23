@@ -7,10 +7,10 @@ export default {
   },
   effects: {},
   reducers: {
-    changeClassComponentCount(state) {
+    changeClassComponentCount(state, { payload }) {
       return {
         ...state,
-        classComponentCount: ++state.classComponentCount
+        classComponentCount: payload.count
       };
     },
     clearClassComponentCount(state) {
