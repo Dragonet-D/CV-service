@@ -31,7 +31,7 @@ function DemoTest(props) {
 
   const alertCount = () => {
     setTimeout(() => {
-      alert(countRef.current);
+      console.log(countRef.current);
     }, 2000);
   };
 
