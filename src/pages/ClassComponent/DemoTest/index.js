@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row } from 'components/common';
 import { ThemeContext, LocaleContext } from 'utils/context';
 
-class Count extends Component {
+class DemoTest extends Component {
   state = {
     stateCount: 0,
     firstName: 'Harry',
@@ -82,4 +82,4 @@ class Count extends Component {
   }
 }
 
-export default Count;
+export default DemoTest;

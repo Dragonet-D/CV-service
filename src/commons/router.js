@@ -75,20 +75,26 @@ export const getRouterData = app => {
     '/home': {
       component: dynamicWrapper(app, [], () => import('pages/Exception/Exception403'))
     },
-    '/class-component/count': {
-      component: dynamicWrapper(app, [], () => import('pages/ClassComponent/Count'))
+    '/class-component/demo-test': {
+      component: dynamicWrapper(app, [], () => import('pages/ClassComponent/DemoTest'))
     },
     '/class-component/demo': {
       component: dynamicWrapper(app, [], () => import('pages/ClassComponent/Demo'))
     },
-    '/hooks/count': {
-      component: dynamicWrapper(app, [], () => import('pages/Hooks/Count'))
+    '/hooks/demo-test': {
+      component: dynamicWrapper(app, [], () => import('pages/Hooks/DemoTest'))
     },
     '/hooks/demo': {
       component: dynamicWrapper(app, [], () => import('pages/Hooks/Demo'))
     },
     '/hooks/optimization': {
       component: dynamicWrapper(app, [], () => import('pages/Hooks/Optimization'))
+    },
+    '/hooks/optimization-test': {
+      component: dynamicWrapper(app, [], () => import('pages/Hooks/OptimizationTest'))
+    },
+    '/hooks/test': {
+      component: dynamicWrapper(app, [], () => import('pages/Hooks/Test'))
     },
     '/exception': {
       component: dynamicWrapper(app, [], () => import('../layouts/ExceptionLayout'))

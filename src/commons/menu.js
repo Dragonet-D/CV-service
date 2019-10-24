@@ -9,8 +9,8 @@ const menuData = [
     hideInMenu: false,
     children: [
       {
-        name: 'Class',
-        path: 'count',
+        name: 'Demo Test',
+        path: 'demo-test',
         authority: []
       },
       {
@@ -28,8 +28,18 @@ const menuData = [
     hideInMenu: false,
     children: [
       {
-        name: 'Count',
-        path: 'count',
+        name: 'Demo Test',
+        path: 'demo-test',
+        authority: []
+      },
+      {
+        name: 'Demo',
+        path: 'demo',
+        authority: []
+      },
+      {
+        name: 'Optimization Test',
+        path: 'optimization-test',
         authority: []
       },
       {
@@ -38,8 +48,8 @@ const menuData = [
         authority: []
       },
       {
-        name: 'Demo',
-        path: 'demo',
+        name: 'Test',
+        path: 'test',
         authority: []
       }
     ]

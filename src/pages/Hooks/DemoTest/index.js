@@ -3,7 +3,7 @@ import { Button, Row } from 'components/common';
 import { connect } from 'dva';
 import { ThemeContext, LocaleContext } from 'utils/context';
 
-function Count(props) {
+function DemoTest(props) {
   const { dispatch, global } = props;
   const { hooksCount } = global;
   const countRef = useRef(null);
@@ -85,4 +85,4 @@ function useWindowWidth() {
   return width;
 }
 
-export default connect(({ global }) => ({ global }))(Count);
+export default connect(({ global }) => ({ global }))(DemoTest);
