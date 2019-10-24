@@ -11,22 +11,13 @@ function Count(props) {
   const locale = useContext(LocaleContext);
 
   const [stateCount, setStateCount] = useState(0);
-  const [firstName, setFirstName] = useState('Harry');
-  const [lastName, setLastName] = useState('Potter');
+  const firstName = useFormInput('Harry');
+  const lastName = useFormInput('Potter');
   countRef.current = stateCount;
 
-  const [width, setWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const width = useWindowWidth();
 
-  useEffect(() => {
-    document.title = `${firstName}  ${lastName}`;
-  }, [firstName, lastName]);
+  useDocumentTitle(`${firstName.value}  ${lastName.value}`);
 
   function handleCountChange() {
     dispatch({
@@ -44,22 +35,14 @@ function Count(props) {
     }, 2000);
   };
 
-  function handleFirstNameChange(e) {
-    setFirstName(e.target.value);
-  }
-
-  function handleLastNameChange(e) {
-    setLastName(e.target.value);
-  }
-
   return (
     <>
       <section className={theme}>
         <Row label="First Name">
-          <input type="text" value={firstName} onChange={handleFirstNameChange} />
+          <input type="text" {...firstName} />
         </Row>
         <Row label="Last Name">
-          <input type="text" value={lastName} onChange={handleLastNameChange} />
+          <input type="text" {...lastName} />
         </Row>
         <Row label="Width">{width}</Row>
         <Row label="Language">{locale}</Row>
@@ -69,6 +52,37 @@ function Count(props) {
       <Button onClick={alertCount}>Alert Count</Button>
     </>
   );
+}
+
+function useDocumentTitle(title) {
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+}
+
+function useFormInput(initialValue) {
+  const [value, setValue] = useState(initialValue);
+
+  function handleChange(e) {
+    setValue(e.target.value);
+  }
+
+  return {
+    value,
+    onChange: handleChange
+  };
+}
+
+function useWindowWidth() {
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  return width;
 }
 
 export default connect(({ global }) => ({ global }))(Count);

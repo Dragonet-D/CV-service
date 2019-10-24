@@ -1,5 +1,10 @@
 const nameSpace = 'UMMI_';
 
+export const config = {
+  logo: '/static/media/logo.svg',
+  title: 'React'
+};
+
 export const USER_KEY = `${nameSpace}CURRENT_USER`;
 export const MATERIAL_KEY = `${nameSpace}MATERIAL_KEYS`;
 export const URL_KEY = `${nameSpace}URLS`;

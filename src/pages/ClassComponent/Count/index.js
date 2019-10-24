@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Row } from 'components/common';
-import { connect } from 'dva';
+import { Row } from 'components/common';
 import { ThemeContext, LocaleContext } from 'utils/context';
 
 class Count extends Component {
@@ -59,8 +58,7 @@ class Count extends Component {
   };
 
   render() {
-    const { global } = this.props;
-    const { stateCount, firstName, lastName, width } = this.state;
+    const { firstName, lastName, width } = this.state;
     return (
       <>
         <ThemeContext.Consumer>
@@ -74,18 +72,14 @@ class Count extends Component {
               </Row>
               <Row label="Width">{width}</Row>
               <LocaleContext.Consumer>
-                {local => <Row label="Name">{local}</Row>}
+                {local => <Row label="Language">{local}</Row>}
               </LocaleContext.Consumer>
             </section>
           )}
         </ThemeContext.Consumer>
-        <Button onClick={this.handleCountChange}>
-          {`props count is ${global.classComponentCount}`}
-        </Button>
-        <Button onClick={this.handleStateCountChange}>{`state count is ${stateCount}`}</Button>
       </>
     );
   }
 }
 
-export default connect(({ global }) => ({ global }))(Count);
+export default Count;

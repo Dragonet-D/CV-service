@@ -33,7 +33,7 @@ app.model(require('./models/messageCenter').default);
 app.router(require('./router').default);
 
 // 5. Start
-app.start('#INTEGRATED_VIDEO_HUB');
+app.start('#root');
 
 export default app._store;  // eslint-disable-line
 export { app };

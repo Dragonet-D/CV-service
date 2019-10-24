@@ -16,6 +16,7 @@ import { getMenuData } from 'commons/menu';
 import SiderMenu from 'components/SliderMenu';
 import { Loading } from 'components/Loading';
 import { BasicLayoutTitle, ScrollBar } from 'components/common';
+import { config } from 'utils/const';
 import store from '@/index';
 
 import styles from './BasicLayout.module.less';
@@ -198,9 +199,9 @@ function BasicLayout(props) {
         <div className={`${styles.toolbar_icon} ${open ? styles.toolbar_icon_active : ''}`}>
           <div className={classes.logo_wrapper} onClick={handleGoHome}>
             <div className={classes.logo}>
-              <img src="/static/media/logo.png" alt="React" />
+              <img src={config.logo} alt="Logo" />
             </div>
-            {open && <div className={classes.icon_name}>React Hooks Share</div>}
+            {open && <div className={classes.icon_name}>{config.title}</div>}
           </div>
         </div>
         <Divider />
