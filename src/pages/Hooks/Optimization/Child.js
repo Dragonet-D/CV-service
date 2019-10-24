@@ -1,12 +1,13 @@
 import React, { memo } from 'react';
 import { Button } from 'components/common';
+import styles from './Child.module.less';
 
 const Child = memo(({ config, onButtonClick }) => {
   return (
-    <>
-      <div>{config.count}</div>
+    <div className={styles.wrapper}>
+      <div className={styles.count}>{config.count}</div>
       <Button onClick={() => onButtonClick()}>Add</Button>
-    </>
+    </div>
   );
 });
 
