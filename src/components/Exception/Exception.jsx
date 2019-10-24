@@ -52,10 +52,10 @@ function Exception(props) {
   const isLogged = !!userLoginInfo.get();
   return (
     <Paper className={classes.wrapper}>
-      <section className={classes.img_container}>
+      <div className={classes.img_container}>
         <img className={classes.img} src={bgs[type]} alt="" />
-      </section>
-      <section className={classes.remind_container}>
+      </div>
+      <div className={classes.remind_container}>
         <h2 className={classes.not_found}>{title}</h2>
         <Typography className={classes.remind}>{remind}</Typography>
         <Link to={isLogged ? '/' : '/user'}>
@@ -63,7 +63,7 @@ function Exception(props) {
             {backText}
           </Button>
         </Link>
-      </section>
+      </div>
     </Paper>
   );
 }
