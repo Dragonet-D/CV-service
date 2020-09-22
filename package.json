@@ -19,6 +19,8 @@
   "homepage": "https://github.com/Dragonet-D/CV-service#readme",
   "dependencies": {
     "koa": "^2.13.0",
-    "koa-router": "^9.4.0"
+    "koa-router": "^9.4.0",
+    "mongodb": "^3.6.2",
+    "mongoose": "^5.10.6"
   }
 }
