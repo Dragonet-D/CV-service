@@ -1,4 +1,5 @@
 const Koa = require('koa');
+import { personModel } from './db'
 const router = require('koa-router')()
 
 const app = new Koa();
@@ -20,6 +21,14 @@ router.get('/hello/:name', async (ctx, next) => {
 router.get('/', async (ctx, next) => {
   ctx.response.body = '<h1>Index</h1>'
 });
+
+router.get('/user', async (ctx, next) => {
+  personModel.findOne({}, (err, docs)=>{
+    if(!err){
+      ctx.response.body = docs.toJSON()
+    }
+  })
+})
 
 // add router middleware
 app.use(router.routes());

@@ -10,7 +10,7 @@ db.on('open', () => {
 })
 
  // 2. 创建模式对象
- let Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 let personSchema = new Schema({
    name: String,
      age: Number,
@@ -42,3 +42,5 @@ personModel.findOne({}, (err, docs)=>{
     console.log(docs.toJSON());
   }
 });
+
+export default personModel
