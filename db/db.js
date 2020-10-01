@@ -37,8 +37,8 @@ let personModel = mongoose.model('person', personSchema);
 
 personModel.findOne({}, (err, docs)=>{
   if(!err){
-     console.log(docs.get('sex'));
-     console.log(docs.set('sex', '男'));
+    console.log(docs.get('sex'));
+    console.log(docs.set('sex', '男'));
     console.log(docs.toJSON());
   }
 });
