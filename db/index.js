@@ -1,3 +1,5 @@
-import personModel from './db'
+const personModel = require('./db')
 
-export { personModel }
+module.exports = {
+  personModel
+}

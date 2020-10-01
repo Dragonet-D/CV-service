@@ -1,6 +1,8 @@
 const Koa = require('koa');
-import { personModel } from './db'
+const db = require('./db')
 const router = require('koa-router')()
+
+const { personModel } = db
 
 const app = new Koa();
 

@@ -35,12 +35,4 @@ let personModel = mongoose.model('person', personSchema);
 //   console.log(err);
 // });
 
-personModel.findOne({}, (err, docs)=>{
-  if(!err){
-    console.log(docs.get('sex'));
-    console.log(docs.set('sex', '男'));
-    console.log(docs.toJSON());
-  }
-});
-
-export default personModel
+module.exports = personModel
