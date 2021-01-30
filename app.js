@@ -25,8 +25,10 @@ router.get('/', async (ctx, next) => {
 });
 
 router.get('/user', async (ctx, next) => {
-  personModel.findOne({}, (err, docs)=>{
+  await personModel.findOne({}, (err, docs)=>{
     if(!err){
+      console.log(docs.toJSON())
+      ctx.status = 200
       ctx.response.body = docs.toJSON()
     }
   })
